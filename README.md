@@ -7,7 +7,7 @@ Windows app for an **ASUS ROG Ryujin III**. Sends GIFs and stills to the 320×24
 1. Open **[v0.1.0-alpha](https://github.com/kuroame-dev/killryujin/releases/tag/v0.1.0-alpha)**.
 2. Download `killryujin-setup.exe`.
 3. Run the installer. It goes into Program Files and adds a Start Menu shortcut.
-4. Open **killryujin** from the Start Menu.
+4. Open **Killryujin** from the Start Menu.
 
 If Armoury Crate is still running, click **Relaunch as Admin**, then **Pause Crate**.
 
@@ -19,6 +19,12 @@ Then:
 4. **Save to cooler**.
 
 If Crate starts at boot and switches back to the ROG animation, click **Play saved GIF**. The file stays on the cooler.
+
+## Bugs
+
+This is an alpha. If something breaks, open an [Issue](https://github.com/kuroame-dev/killryujin/issues/new).
+
+Include Windows version, cooler model (White / Extreme / 360 / EVA), and the steps you took. If Save fails, copy the error from the window.
 
 ## Limits and safety
 
