@@ -73,6 +73,11 @@ GALLERY_N = 4
 THUMB_W = 77
 THUMB_H = 58
 THUMB_GAP = 4
+THUMB_CELL_W = THUMB_W + 2
+PREVIEW_FRAME_W = PREVIEW_W + 2
+PREVIEW_FRAME_H = PREVIEW_H + 2
+GALLERY_W = GALLERY_N * THUMB_CELL_W + (GALLERY_N - 1) * THUMB_GAP
+RIGHT_COL_W = max(PREVIEW_FRAME_W, GALLERY_W)
 ROW_CHARS = 44
 LINE = 8
 BTN_GAP = LINE * 2
@@ -282,6 +287,9 @@ class PreviewCanvas(QLabel):
         super().__init__(parent)
         self._owner = owner
         self.setFixedSize(PREVIEW_W, PREVIEW_H)
+        self.setFrameShape(QFrame.Shape.NoFrame)
+        self.setLineWidth(0)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setCursor(Qt.CursorShape.SizeAllCursor)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -455,6 +463,7 @@ class App(QMainWindow):
 
     def _build(self) -> None:
         shell = QWidget()
+        shell.setAutoFillBackground(True)
         self.setCentralWidget(shell)
         outer = QVBoxLayout(shell)
         outer.setContentsMargins(16, LINE, 16, LINE)
@@ -471,7 +480,7 @@ class App(QMainWindow):
         self._left.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
 
         right = QWidget()
-        right.setFixedWidth(PREVIEW_W)
+        right.setFixedWidth(RIGHT_COL_W)
         self._right = QVBoxLayout(right)
         self._right.setContentsMargins(0, 0, 0, 0)
         self._right.setSpacing(LINE)
@@ -667,10 +676,12 @@ class App(QMainWindow):
         parent.addWidget(heading, 0, Qt.AlignmentFlag.AlignLeft)
 
         frame = QFrame()
-        frame.setFixedSize(PREVIEW_W + 2, PREVIEW_H + 2)
+        frame.setFrameShape(QFrame.Shape.NoFrame)
+        frame.setLineWidth(0)
+        frame.setFixedSize(PREVIEW_FRAME_W, PREVIEW_FRAME_H)
         frame.setStyleSheet(f"QFrame {{ background: {BG}; border: 1px solid {FG}; }}")
         flay = QVBoxLayout(frame)
-        flay.setContentsMargins(1, 1, 1, 1)
+        flay.setContentsMargins(0, 0, 0, 0)
         flay.setSpacing(0)
         self.preview_canvas = PreviewCanvas(self)
         flay.addWidget(self.preview_canvas)
@@ -692,7 +703,7 @@ class App(QMainWindow):
         lay.addSpacing(BTN_GAP)
         lay.addWidget(self.reset_view_btn)
         lay.addStretch(1)
-        row.setFixedWidth(PREVIEW_W)
+        row.setFixedWidth(RIGHT_COL_W)
         parent.addWidget(row, 0, Qt.AlignmentFlag.AlignLeft)
 
         recent = self._label("> RECENT", self.font)
@@ -700,7 +711,7 @@ class App(QMainWindow):
         parent.addWidget(recent, 0, Qt.AlignmentFlag.AlignLeft)
 
         self.gallery_host = QWidget()
-        self.gallery_host.setFixedWidth(PREVIEW_W)
+        self.gallery_host.setFixedWidth(RIGHT_COL_W)
         self.gallery_row = QHBoxLayout(self.gallery_host)
         self.gallery_row.setContentsMargins(0, 0, 0, 0)
         self.gallery_row.setSpacing(THUMB_GAP)

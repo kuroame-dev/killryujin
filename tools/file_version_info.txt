@@ -21,7 +21,7 @@ VSVersionInfo(
             StringStruct(u"InternalName", u"killryujin"),
             StringStruct(u"LegalCopyright", u"Copyright (c) 2026 killryujin contributors"),
             StringStruct(u"OriginalFilename", u"killryujin.exe"),
-            StringStruct(u"ProductName", u"killryujin"),
+            StringStruct(u"ProductName", u"Killryujin"),
             StringStruct(u"ProductVersion", u"0.1.0-alpha"),
           ],
         )

@@ -1,4 +1,4 @@
-#define AppName "killryujin"
+#define AppName "Killryujin"
 #define AppVersion "0.1.0-alpha"
 #define AppPublisher "killryujin contributors"
 
@@ -13,7 +13,7 @@ VersionInfoVersion=0.1.0.0
 VersionInfoProductVersion=0.1.0.0
 VersionInfoCompany={#AppPublisher}
 VersionInfoDescription=ASUS ROG Ryujin III LCD
-DefaultDirName={autopf}\{#AppName}
+DefaultDirName={autopf}\killryujin
 DefaultGroupName={#AppName}
 DisableProgramGroupPage=yes
 LicenseFile=..\LICENSE
@@ -47,4 +47,4 @@ Name: "{autoprograms}\{#AppName}"; Filename: "{app}\killryujin.exe"; Comment: "R
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\killryujin.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\killryujin.exe"; Description: "Launch killryujin"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\killryujin.exe"; Description: "Launch Killryujin"; Flags: nowait postinstall skipifsilent
