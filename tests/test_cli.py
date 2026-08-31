@@ -11,6 +11,12 @@ def test_parser_requires_a_command() -> None:
         parser.parse_args([])
 
 
+def test_package_entry_is_importable() -> None:
+    from killryujin.__main__ import main
+
+    assert callable(main)
+
+
 def test_persist_gif_defaults() -> None:
     args = build_parser().parse_args(["lcd", "persist-gif", r"C:\anim.gif"])
     assert args.lcd_action == "persist-gif"

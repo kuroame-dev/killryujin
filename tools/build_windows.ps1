@@ -17,13 +17,16 @@ python -m PyInstaller `
   --hidden-import PySide6.QtCore `
   --hidden-import PySide6.QtGui `
   --hidden-import PySide6.QtWidgets `
+  --hidden-import killryujin `
+  --hidden-import killryujin.__main__ `
   --hidden-import killryujin.gui `
   --hidden-import killryujin.device `
   --hidden-import killryujin.crate `
   --hidden-import killryujin.winusb_bulk `
+  --collect-submodules killryujin `
   --add-data "killryujin/icon.png;killryujin" `
   --add-data "killryujin/icon.ico;killryujin" `
-  killryujin\__main__.py
+  tools\pyinstaller_entry.py
 
 Write-Host "Built: dist\killryujin.exe"
 
