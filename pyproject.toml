@@ -1,0 +1,51 @@
+[project]
+name = "killryujin"
+version = "0.1.0a1"
+description = "ASUS ROG Ryujin III LCD control without Armoury Crate"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["asus", "rog", "ryujin", "aio", "lcd"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Environment :: Win32 (MS Windows)",
+  "Topic :: System :: Hardware",
+]
+dependencies = [
+  "hidapi>=0.14",
+  "pillow>=10.0",
+  "PySide6>=6.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+killryujin = "killryujin.__main__:main"
+
+[project.gui-scripts]
+killryujin-gui = "killryujin.gui:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["killryujin*"]
+
+[tool.setuptools.package-data]
+killryujin = ["icon.png", "icon.ico"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

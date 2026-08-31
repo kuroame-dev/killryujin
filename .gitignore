@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+.env
+.env.*
+
+# Packaging / PyInstaller
+dist/
+build/
+*.spec
+
+# Editors / OS
+.idea/
+.vscode/
+.cursor/
+*.user
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Local logs / test junk
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml

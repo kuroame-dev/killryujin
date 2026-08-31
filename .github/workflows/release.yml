@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Build exe and installer
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File tools/build_windows.ps1
+
+      - name: Checksums
+        shell: pwsh
+        run: |
+          Get-FileHash dist\killryujin-setup.exe, dist\killryujin.exe -Algorithm SHA256 |
+            ForEach-Object { "{0}  {1}" -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) } |
+            Set-Content -Encoding ascii dist\SHA256SUMS.txt
+          Get-Content dist\SHA256SUMS.txt
+
+      - name: Attach to Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/killryujin-setup.exe
+            dist/killryujin.exe
+            dist/SHA256SUMS.txt
+
+      - name: Store build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: killryujin-windows
+          path: |
+            dist/killryujin-setup.exe
+            dist/killryujin.exe
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
